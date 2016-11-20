@@ -1,4 +1,4 @@
-import { appDB, currentUser } from './DB';
-import { UserModel } from './UserModel';
+import appDB from './DB';
+import UserModel from './UserModel';
 
-export { appDB, currentUser, UserModel };
+export { appDB, UserModel };

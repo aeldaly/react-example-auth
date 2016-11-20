@@ -1,6 +1,6 @@
 import Realm from 'realm';
 
-import { UserModel } from './UserModel';
+import UserModel from './UserModel';
 
 class DB {
   static realm;
@@ -10,11 +10,7 @@ class DB {
       return this.realm;
     }
 
-    let realm = new Realm({
-      schema: [
-        UserModel
-      ]
-    });
+    const realm = new Realm({ schema: [UserModel] });
 
     this.realm = realm;
     return realm;
@@ -22,7 +18,5 @@ class DB {
 }
 
 const appDB = DB.db();
-console.log(appDB.path);
-const currentUser = appDB.objects('User').entries()[0];
 
-export { appDB, currentUser };
+export default appDB;

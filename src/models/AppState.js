@@ -1,28 +1,15 @@
 import appDB from './DB';
 
-class UserModel {
+class AppStateModel {
   static schema = {
-    name: 'User',
-    primaryKey: 'uid',
+    name: 'AppState',
+    primaryKey: 'key',
     properties: {
-      uid: {
+      key: {
         type: 'string',
       },
-      displayName: {
+      value: {
         type: 'string',
-      },
-      email: {
-        type: 'string',
-      },
-      photoUrl: {
-        type: 'string',
-      },
-
-      emailVerified: {
-        type: 'bool',
-      },
-      isAnonymous: {
-        type: 'bool',
       },
     },
   };
@@ -47,4 +34,4 @@ class UserModel {
   }
 }
 
-export default UserModel;
+export default AppStateModel;

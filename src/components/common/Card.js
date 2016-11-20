@@ -1,14 +1,5 @@
-import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-import axios from 'axios';
-
-const Card = ( props ) => {
-  return (
-    <View style={styles.containerStyle}>
-      {props.children}
-    </View>
-  );
-}
+import React from 'react';
+import { View } from 'react-native';
 
 const styles = {
   containerStyle: {
@@ -18,7 +9,10 @@ const styles = {
     borderBottomWidth: 0,
 
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
     shadowOpacity: 0.1,
     shadowRadius: 2,
 
@@ -26,8 +20,18 @@ const styles = {
 
     marginLeft: 5,
     marginRight: 5,
-    marginTop: 10
-  }
-}
+    marginTop: 10,
+  },
+};
 
-export { Card };
+const Card = props => (
+  <View style={styles.containerStyle}>
+    {props.children}
+  </View>
+);
+
+Card.propTypes = {
+  children: React.PropTypes.node,
+};
+
+export default Card;

@@ -1,17 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-
-const Button = ({ onPress, children }) => {
-  const { textStyle, viewStyle, buttonStyle } = styles;
-
-  return (
-    <View style={viewStyle}>
-      <TouchableOpacity onPress={onPress} style={buttonStyle}>
-        <Text style={textStyle}>{children}</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
 
 const styles = {
   textStyle: {
@@ -23,11 +11,11 @@ const styles = {
     fontWeight: '600',
 
     paddingTop: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   viewStyle: {
     flexDirection: 'row',
-    flex: 1
+    flex: 1,
   },
   buttonStyle: {
     flex: 1,
@@ -43,8 +31,25 @@ const styles = {
     borderColor: '#007aff',
 
     marginLeft: 5,
-    marginRight: 5
-  }
-}
+    marginRight: 5,
+  },
+};
 
-export { Button };
+const Button = ({ onPress, children }) => {
+  const { textStyle, viewStyle, buttonStyle } = styles;
+
+  return (
+    <View style={viewStyle}>
+      <TouchableOpacity onPress={onPress} style={buttonStyle}>
+        <Text style={textStyle}>{children}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+Button.propTypes = {
+  onPress: React.PropTypes.func,
+  children: React.PropTypes.node,
+};
+
+export default Button;

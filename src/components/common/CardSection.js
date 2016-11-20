@@ -1,14 +1,5 @@
-import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-import axios from 'axios';
-
-const CardSection = ( props ) => {
-  return (
-    <View style={styles.containerStyle}>
-      {props.children}
-    </View>
-  );
-}
+import React from 'react';
+import { View } from 'react-native';
 
 const styles = {
   containerStyle: {
@@ -21,8 +12,18 @@ const styles = {
     backgroundColor: '#fff',
 
     justifyContent: 'flex-start',
-    flexDirection: 'row'
-  }
-}
+    flexDirection: 'row',
+  },
+};
 
-export { CardSection };
+const CardSection = props => (
+  <View style={styles.containerStyle}>
+    {props.children}
+  </View>
+);
+
+CardSection.propTypes = {
+  children: React.PropTypes.node,
+};
+
+export default CardSection;
