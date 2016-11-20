@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 import firebase from 'firebase';
-import DB from './models';
+import { UserModel, currentUser } from './models/';
 
 import { Header, Button } from './components/common';
 import LoginForm from './components/LoginForm'
@@ -19,20 +19,24 @@ class App extends React.Component {
       messagingSenderId: '933427258757'
     });
 
-    firebase.auth().onAuthStateChanged((user) => {
-      // User: displayName, email, emailVerified, isAnonymous, photoUrl, uid
+    firebase.auth().onAuthStateChanged((remoteUser) => {
+      console.count('onAuthStateChanged');
 
-      if (user) {
-        DB.create('User', {
-          uid: user.uid,
-          displayName: u.displayName,
-          email: u.email,
-          photoUrl: u.photoUrl,
-          emailVerified: u.emailVerified,
-          isAnonymous: u.isAnonymous
-        })
+      // if (!currentUser) {
+      //   debugger;
+      // }
+
+      if (currentUser || remoteUser) {
+        if (!currentUser) {
+          UserModel.createFromRemoteUser(remoteUser);
+        }
+
         this.setState({ loggedIn: true });
       } else {
+        if (currentUser) {
+          UserModel.destroy(currentUser);
+        }
+
         this.setState({ loggedIn: false });
       }
     });
