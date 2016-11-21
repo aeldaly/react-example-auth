@@ -8,15 +8,18 @@ import { Header, Button } from './components/common';
 import LoginForm from './components/LoginForm';
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.signOut = this.signOut.bind(this);
+  }
+
   state = {
     loggedIn: null,
   };
 
   componentWillMount() {
     firebase.initializeApp({ apiKey: 'AIzaSyDYCUFG6po6fLVBJx79KGaxJXchLgVZKM8', authDomain: 'react-test-auth.firebaseapp.com', databaseURL: 'https://react-test-auth.firebaseio.com', storageBucket: 'react-test-auth.appspot.com', messagingSenderId: '933427258757' });
-  }
 
-  componentDidMount() {
     firebase.auth().onAuthStateChanged((remoteUser) => {
       const currentUser = AppState.get('currentUser');
       if (!currentUser.notFound || remoteUser) {
@@ -31,10 +34,16 @@ class App extends React.Component {
     });
   }
 
+  signOut() {
+    AppState.set('currentUser', null);
+    this.setState({ loggedIn: false });
+    firebase.auth().signOut();
+  }
+
   renderContent() {
     if (this.state.loggedIn) {
       return (
-        <Button>
+        <Button onPress={this.signOut}>
           Log Out
         </Button>
       );
