@@ -1,6 +1,7 @@
 import Realm from 'realm';
 
 import UserModel from './UserModel';
+import AppState from './AppState';
 
 class DB {
   static realm;
@@ -10,10 +11,14 @@ class DB {
       return this.realm;
     }
 
-    const realm = new Realm({ schema: [UserModel] });
+    const realm = new Realm({ schema: [UserModel, AppState] });
 
     this.realm = realm;
     return realm;
+  }
+
+  destroy(record) {
+    this.realm.delete(record);
   }
 }
 

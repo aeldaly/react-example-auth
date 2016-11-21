@@ -4,6 +4,7 @@ import { Text } from 'react-native';
 import firebase from 'firebase';
 
 import { Button, Card, CardSection, Input, Spinner } from './common';
+import { AppState } from '../models';
 
 const styles = {
   errorTextStye: {
@@ -14,6 +15,11 @@ const styles = {
 };
 
 class LoginForm extends Component {
+  constructor() {
+    super();
+    this.onButtonPress = this.onButtonPress.bind(this);
+  }
+
   state = {
     email: '',
     password: '',
@@ -38,8 +44,9 @@ class LoginForm extends Component {
       });
   }
 
-  onLoginSuccess() {
+  onLoginSuccess(user) {
     this.setState({ email: '', password: '', error: '', loading: false });
+    AppState.setCurrentUser(user);
   }
 
   onLoginError() {
